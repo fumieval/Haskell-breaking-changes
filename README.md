@@ -1,5 +1,15 @@
 This document describes a list of upcoming/proposed changes to Haskell core/de facto libraries.
 
+Ongoing: Word8#
+----
+
+* Summary: `Word{8,16,32}` are now defined in terms of the corresponding primitive types instead of `Word#`.
+* Since: GHC 9.2
+* Breakage: major
+* Proposal: https://ghc-proposals.readthedocs.io/en/latest/proposals/0074-small-primitives.html
+* Merge request: https://gitlab.haskell.org/ghc/ghc/-/merge_requests/4390
+* How to fix: insert `word*ToWord*` (https://hackage.haskell.org/package/ghc-prim-0.8.0/docs/GHC-Prim.html#v:word8ToWord-35-) conditionally (cf. [Fix build on GHC 9.2 by josephcsible · Pull Request #354 · haskell-crypto/cryptonite](https://github.com/haskell-crypto/cryptonite/pull/354/files)) using CPP
+
 Upcoming: Remove `Control.Monad.Trans.List`
 ----
 
