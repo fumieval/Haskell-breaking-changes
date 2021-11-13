@@ -73,6 +73,7 @@ Planned: remove (/=) from the the Eq class
 See also
 ----
 
+* [Warnings and sanity-checking](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/using-warnings.html)
 * [Approved core library proposals](https://github.com/haskell/core-libraries-committee/issues?q=is%3Aissue+is%3Aclosed+label%3Aapproved)
 * [Accepted GHC proposals](https://github.com/ghc-proposals/ghc-proposals/pulls?q=is%3Apr+is%3Aclosed+label%3AAccepted)
 * [GHC Boot Library Version History](https://gitlab.haskell.org/ghc/ghc/-/wikis/commentary/libraries/version-history): useful for updating version constraints
