@@ -70,6 +70,19 @@ Planned: remove (/=) from the the Eq class
 * Expected breakage: 131 packages according to the proposal
 * How to fix: Remove definitions of `(/=)` (backward-compatible)
 
+
+Planned: disable StarIsType by default
+----
+
+* Summary: `*` will no longer be parsed as a kind of value types (`Type`).
+* Proposal: https://github.com/ghc-proposals/ghc-proposals/pull/143
+* ETA: Unknown
+* Tracking issue: N/A
+* Merge request: N/A
+* Expected breakage: medium
+* Relevant warnings: `-Wstar-is-type`
+* How to fix: Replace `*` with `Type` (from `Data.Kind`)
+
 See also
 ----
 
