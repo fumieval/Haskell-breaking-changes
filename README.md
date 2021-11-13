@@ -59,7 +59,7 @@ Planned: remove return from Monad
 Planned: remove mappend from Monoid
 ----
 
-* Summary: return gets removed from the Monad class and becomes a top-level function defined as `mappend = (<>)`
+* Summary: mappend gets removed from the Monoid class and becomes a top-level function defined as `mappend = (<>)`
 * Proposal: [GHC wiki: semigroup-monoid](https://gitlab.haskell.org/ghc/ghc/-/wikis/proposal/semigroup-monoid), related: [Enable -Wnoncanonical-monad-instances and -Wnoncanonical-monoid-instances by default](https://github.com/ghc-proposals/ghc-proposals/pull/314)
 * ETA: Unknown
 * Tracking issue: N/A
