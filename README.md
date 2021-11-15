@@ -44,6 +44,18 @@ https://gitlab.haskell.org/ghc/ghc/-/merge_requests/5107
 * Relevant warnings: `-Wcompat-unqualified-imports` (implied by -Wcompat)
 * How to fix: import `Data.List` qualified or explicitly import functions that don't conflict with Foldable/Traversable variants
 
+Planned: forall becomes a keyword
+----
+
+* Summary: 'forall' will become a keyword at the term level
+* Proposal: [Visible 'forall' in types of terms](https://github.com/ghc-proposals/ghc-proposals/pull/281)
+* ETA: GHC 9.10?
+* Tracking issue: N/A
+* Merge request: N/A
+* Expected breakage: minor (authors of the affected packages were notified)
+* Relevant warnings: `-Wforall-identifier` (introduced and enabled by default in GHC 9.4)
+* How to fix: Rename identifiers
+
 Planned: remove return from Monad
 ----
 
