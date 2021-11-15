@@ -1,5 +1,9 @@
 This document describes a list of upcoming/proposed changes to Haskell core/de facto libraries.
 
+* **Ongoing**: the change is already rolled out.
+* **Upcoming**: the change is made upstream, and will be released in near future.
+* **Planned**: the change has been approved by the committee. Implementation is not necessaryly available
+
 Ongoing: Word8#
 ----
 
