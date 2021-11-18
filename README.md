@@ -8,6 +8,7 @@ Ongoing: Word8#
 ----
 
 * Summary: `Word{8,16,32}` are now defined in terms of the corresponding primitive types instead of `Word#`.
+* Reason: Small word types used to store `Word#` inside, making record types containing them space-inefficient.
 * Since: GHC 9.2
 * Breakage: major
 * Proposal: https://ghc-proposals.readthedocs.io/en/latest/proposals/0074-small-primitives.html
@@ -17,7 +18,8 @@ Ongoing: Word8#
 Upcoming: Remove `Control.Monad.Trans.List`
 ----
 
-* Summary: `Control.Monad.Trans.List` is gone because it's not a monad transformer.
+* Summary: `Control.Monad.Trans.List` is gone
+* Reason: `ListT` is a monad only if the underlying monad is commutative; therefore it is not a valid monad transformer.
 * ETA: GHC 9.4 / transformers-0.6
 * Expected breakage: medium
 * Tracking issue: https://hub.darcs.net/ross/transformers/issue/75
@@ -29,6 +31,7 @@ Upcoming: Remove `Control.Monad.Trans.Error`
 ----
 
 * Summary: `Control.Monad.Trans.Error` is removed in favour of `Control.Monad.Trans.Except`.
+* Reason: `ErrorT` imposes an Error constraint, making it difficult to use as a general-purpose `Either` transformer.
 * ETA: GHC 9.4 / transformers-0.6
 * Expected breakage: medium
 * Tracking issue: N/A
@@ -39,6 +42,7 @@ Upcoming: Monomorphise Data.List
 ----
 
 * Summary: Foldable/Traversable-polymorphic functions in Data.List get specialised to `[]`
+* Reason: There's a custom importing `Data.List` unqualified, making additions like `singleton` and `uncons` controversial. Making the list API monomorphic and encouraging to import it qualified make it more consistent with other container modules.
 * ETA: GHC 9.6 / base-4.18?
 * Proposal: https://groups.google.com/g/haskell-core-libraries/c/q3zHLmzBa5E/m/OrHHKaJNAQAJ?pli=1
 * Tracking issue: [#20025](https://gitlab.haskell.org/ghc/ghc/-/issues/20025)
@@ -52,6 +56,7 @@ Planned: forall becomes a keyword
 ----
 
 * Summary: 'forall' will become a keyword at the term level
+* Reason: Making Type-level and term-level syntax more consistent is a way forward to introduce dependent types
 * Proposal: [Visible 'forall' in types of terms](https://github.com/ghc-proposals/ghc-proposals/pull/281)
 * ETA: GHC 9.10?
 * Tracking issue: N/A
@@ -64,6 +69,7 @@ Planned: remove return from Monad
 ----
 
 * Summary: return gets removed from the Monad class and becomes a top-level function defined as `return = pure`
+* Reason: Now that Monad is a subclass of Applicative, `return` is completely redundant (it doesn't make sense if `return` is not `pure`).
 * Proposal: [GHC wiki: monad-of-no-return](https://gitlab.haskell.org/ghc/ghc/-/wikis/proposal/monad-of-no-return), related: [Enable -Wnoncanonical-monad-instances and -Wnoncanonical-monoid-instances by default](https://github.com/ghc-proposals/ghc-proposals/pull/314)
 * ETA: Unknown
 * Tracking issue: N/A
@@ -76,6 +82,7 @@ Planned: remove mappend from Monoid
 ----
 
 * Summary: mappend gets removed from the Monoid class and becomes a top-level function defined as `mappend = (<>)`
+* Reason: Since `Semigroup` is a superclass of `Monoid`, `mappend` does not have to be defined.
 * Proposal: [GHC wiki: semigroup-monoid](https://gitlab.haskell.org/ghc/ghc/-/wikis/proposal/semigroup-monoid), related: [Enable -Wnoncanonical-monad-instances and -Wnoncanonical-monoid-instances by default](https://github.com/ghc-proposals/ghc-proposals/pull/314)
 * ETA: Unknown
 * Tracking issue: N/A
@@ -89,6 +96,7 @@ Planned: remove (/=) from the the Eq class
 ----
 
 * Summary: (/=) gets removed from the Eq class and becomes a top-level function defined as `a /= b = not (a == b)`
+* Reason: The only valid semantics of `x /= y` is `not (x == y)`; unlike `compare` vs `(<=)`, there's no room for any performance improvements.
 * Proposal: https://github.com/haskell/core-libraries-committee/issues/3
 * ETA: Unknown
 * Tracking issue: N/A
@@ -101,6 +109,7 @@ Planned: disable StarIsType by default
 ----
 
 * Summary: `*` will no longer be parsed as a kind of value types (`Type`).
+* Reason: Special treatment to `*` complicates the syntax and prevents the use of it as a type operator.
 * Proposal: https://github.com/ghc-proposals/ghc-proposals/pull/143
 * ETA: Unknown
 * Tracking issue: N/A
@@ -112,7 +121,7 @@ Planned: disable StarIsType by default
 See also
 ----
 
-* [deprecation-mechanisms/type-class-methods](https://gitlab.haskell.org/ghc/ghc/-/wikis/design/deprecation-mechanisms/type-class-methods)
+* [deprecation-mechanisms/type-class-methods](https://gitlab.haskell.org/ghc/ghc/-/wikis/design/deprecation-mechanisms/type-class-methods) (not implemented; it would be nice to have method deprecation)
 * [Warnings and sanity-checking](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/using-warnings.html)
 * [Approved core library proposals](https://github.com/haskell/core-libraries-committee/issues?q=is%3Aissue+is%3Aclosed+label%3Aapproved)
 * [Accepted GHC proposals](https://github.com/ghc-proposals/ghc-proposals/pulls?q=is%3Apr+is%3Aclosed+label%3AAccepted)
